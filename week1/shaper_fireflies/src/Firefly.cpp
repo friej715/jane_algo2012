@@ -28,6 +28,9 @@ void Firefly::setup() {
     followPoint.x = ofRandom(ofGetWidth());
     followPoint.y = ofRandom(ofGetHeight());
     
+    alpha = 5;
+    followAlpha = 75;
+    
 }
 
 void Firefly::update() {
@@ -45,14 +48,15 @@ void Firefly::update() {
 }
 
 void Firefly::draw() {
-    ofSetColor(255, 255, 0, pct*100+10);
+    
+    ofSetColor(255, 255, 0, alpha);
     ofFill();
     ofEnableAlphaBlending();
     for (int i = 0; i < 5; i++) {
         ofEllipse(pos.x += 7*cos(angle+i*5), pos.y += 7*sin(angle+i*5), w*4, h*4);
     }
     
-    ofSetColor(255, 100);
+    ofSetColor(255, 200);
     ofFill();
     ofEllipse(pos.x, pos.y, w, h);
 
@@ -73,4 +77,7 @@ void Firefly::interpolateByPct(float myPct){
 	pct = powf(myPct, shaper);
 	pos.x = (1-pct) * pos.x + (pct) * followPoint.x;
 	pos.y = (1-pct) * pos.y + (pct) * followPoint.y;
+    
+    alpha = (1-pct) * alpha + (pct) * followAlpha;
+    
 }

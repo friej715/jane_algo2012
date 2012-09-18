@@ -37,6 +37,7 @@ void testApp::update(){
     if (ofGetElapsedTimeMillis() - startTime > interval) {
         for (int i = 0; i < fireflies.size(); i++) {
             fireflies[i].changeDir();
+            fireflies[i].alpha = 10;
         }
         pct = 0;
         startTime = ofGetElapsedTimeMillis();

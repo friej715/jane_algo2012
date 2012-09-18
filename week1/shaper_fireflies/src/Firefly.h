@@ -27,6 +27,9 @@ public:
     float pct;
     float shaper;
     
+    int alpha;
+    int followAlpha;
+    
     
     
     void setup();
