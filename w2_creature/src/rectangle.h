@@ -29,6 +29,8 @@ class rectangle {
     
     int whichOne; // super-stupid way of doing this... sry d00dz
     
+    ofColor c;
+    
     
 };
 

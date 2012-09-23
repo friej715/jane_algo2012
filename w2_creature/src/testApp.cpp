@@ -43,11 +43,21 @@ void testApp::update(){
     
     for (int i = 0; i < foods.size(); i++) {
         foods[i].update();
+        
+        if (ofDist(foods[i].pos.x, foods[i].pos.y, creatureParts[4].pos.x, creatureParts[4].pos.y) < 15) {
+            foods.erase(foods.begin() + i);
+        }
     }
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    for (int i = 4; i > 0; i--) {
+        ofSetColor(creatureParts[i].c);
+        ofSetLineWidth(creatureParts[i].radius);
+        ofLine(creatureParts[i].pos.x, creatureParts[i].pos.y, creatureParts[i-1].pos.x, creatureParts[i-1].pos.y);
+    }
+    
     for (int i = 5; i >=0; i--) {
         creatureParts[i].draw(i);
     }

@@ -4,11 +4,13 @@
 //------------------------------------------------------------------
 rectangle::rectangle(){
     
-	catchUpSpeed = 0.1f;
+	catchUpSpeed = 0.07f;
     radius = 30;
     
     pos.set(0,0);
 	prevPos.set(0,0);
+    
+    
     
     
 }
@@ -19,13 +21,15 @@ void rectangle::draw(int i) {
     
     ofFill();
     ofSetRectMode(OF_RECTMODE_CENTER); // center around the position
-    ofSetColor(198,246,55);
-    
-    
+    c.set(i*3+100, i*6+150, 55);
+    ofSetColor(c);
+
     ofPushMatrix();
         ofTranslate(pos.x, pos.y, 0);
         //ofRotateZ(angle * RAD_TO_DEG);
+        
         ofEllipse( 0,0, radius,radius);
+
     if (i == 0) {
         ofSetColor(255);
         ofEllipse(-5, -5, 10, 10);
@@ -52,8 +56,8 @@ void rectangle::draw(int i) {
 //------------------------------------------------------------------
 void rectangle::xenoToPoint(float catchX, float catchY){
         
-	pos.x = (catchUpSpeed * catchX + (1-catchUpSpeed) * pos.x) + cos(ofGetElapsedTimef() * whichOne); 
-	pos.y = (catchUpSpeed * catchY + (1-catchUpSpeed) * pos.y); 
+	pos.x = (catchUpSpeed * catchX + (1-catchUpSpeed) * pos.x) + (2*cos(ofGetElapsedTimef() + whichOne)); 
+	pos.y = (catchUpSpeed * catchY + (1-catchUpSpeed) * pos.y) + (sin(ofGetElapsedTimef() + whichOne)); 
     
 	float dx = pos.x - prevPos.x;
 	float dy = pos.y - prevPos.y;
