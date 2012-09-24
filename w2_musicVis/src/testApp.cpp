@@ -49,30 +49,20 @@ void testApp::setup(){
     ms0.push_back(91375 + 600 + 1700 + 600 + 1700 +ofGetElapsedTimeMillis());
     ms0.push_back(91375 + 600 + 1700 + 600 + 1700 + 600 + ofGetElapsedTimeMillis());    
     
+    
     ms2.push_back(startTime + 40775);
     ms2.push_back(startTime + 41375);
     
-    ms2.push_back(startTime + 42975);
-    ms2.push_back(startTime + 43375);
+    ms2.push_back(startTime + 42375);
+    ms2.push_back(startTime + 43000);
     
-    ms2.push_back(startTime + 44775);
-    ms2.push_back(startTime + 45175);
+    ms2.push_back(startTime + 44475);
+    ms2.push_back(startTime + 44800);
     
-    ms2.push_back(startTime + 46875);
-    ms2.push_back(startTime + 47575);
+    ms2.push_back(startTime + 46575);
+    ms2.push_back(startTime + 47200);
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     background.set(12,17,23); 
     col.set(100, 100, 100);
@@ -103,21 +93,32 @@ void testApp::update(){
     cout << ofGetElapsedTimeMillis() << endl;
     
     
+    
     if (musicState == 0) { // if we're in a certain part of the music
+        alterMS0 = false;
         for (int i = 0; i < ms0.size(); i++) {
             if (abs(ofGetElapsedTimeMillis() - ms0[i]) < 50) {
-                cout << "bang" << endl;
+                alterMS0 = true;
             }
+        }
+        
+        
+        if (alterMS0) {
+            col.set(100, 0, 0);
+        } else {
+            col.set(100, 100, 100);
         }
     }
     
     if (musicState == 1) {
-        
+        alterMS2 = false;
         for (int i = 0; i < ms2.size(); i++) {
-            if (abs(ofGetElapsedTimeMillis() - ms2[i]) < 50) {
+            if (abs(ofGetElapsedTimeMillis() - ms2[i]) < 100) {
                 cout << "bang" << endl;
+                alterMS2 = true;
             }
         }
+        
         
         if (ofGetElapsedTimeMillis()%4 == 0) {
             alterMS1 = true;
@@ -125,7 +126,6 @@ void testApp::update(){
             alterMS1 = false;
         }
     }
-    
     
     
     
@@ -144,7 +144,11 @@ void testApp::draw(){
         ofSetColor(col);
         
         for (int i = 0; i < 20; i++) {
-            
+            if (i%3>0) {
+                col.setBrightness(255 + (ofMap(sin(ofGetElapsedTimef() * 5), -1, 1, -255, 0)));
+            } else {
+                col.setBrightness(255 + (ofMap(sin(ofGetElapsedTimef() * 5 +1.5), -1, 1, -255, 0)));
+            }
             
             float radius = ofMap(sin(ofGetElapsedTimef()), -1, 1, 10, ofGetWidth()) + i * .75;
             float angle = ofGetElapsedTimef() * (1 + i / 10.0);
@@ -154,14 +158,14 @@ void testApp::draw(){
                 float y = yorig + radius * sin(angle);
                 
                 ofSetRectMode(OF_RECTMODE_CENTER);
-                ofEllipse(x,y,10,10);
+                ofRect(x,y,10,10);
                 
             } else {
                 float x = xorig + radius * cos(angle);
                 float y = yorig + radius * sin(angle);
                 
                 ofSetRectMode(OF_RECTMODE_CENTER);
-                ofEllipse(x,y,10,10);
+                ofRect(x,y,10,10);
                 
             }
         }
@@ -169,6 +173,12 @@ void testApp::draw(){
         
         for (int i = 0; i < 20; i++) {
             ofFill();
+            
+            if (i%3>0) {
+                col.setBrightness(255 + (ofMap(sin(ofGetElapsedTimef() * 5), -1, 1, -255, 0)));
+            } else {
+                col.setBrightness(255 + (ofMap(sin(ofGetElapsedTimef() * 5 +1.5), -1, 1, -255, 0)));
+            }
             
             float radius = ofMap(cos(ofGetElapsedTimef()), -1, 1, 10, ofGetWidth())/i;
             float angle = ofGetElapsedTimef() * (1 + i / 10.0);
@@ -178,7 +188,7 @@ void testApp::draw(){
                 float y = yorig + radius * sin(angle);
                 
                 ofSetRectMode(OF_RECTMODE_CENTER);
-                ofEllipse(x,y,10,10);
+                ofRect(x,y,10,10);
                 
             } else {
                 float x = xorig + radius * cos(angle);
@@ -186,7 +196,7 @@ void testApp::draw(){
                 
 
                 ofSetRectMode(OF_RECTMODE_CENTER);
-                ofEllipse(x,y,10,10);
+                ofRect(x,y,10,10);
                 
             }
             
@@ -206,7 +216,7 @@ void testApp::draw(){
                 float y = yorig + radius * sin(angle);
                 
                 ofSetRectMode(OF_RECTMODE_CENTER);
-                ofEllipse(x,y,10,10);
+                ofRect(x,y,10,10);
                 
             } else {
                 c.setHue(ofMap(sin((ofGetElapsedTimef() + angle)/100), -1, 1, 255, 0));
@@ -214,7 +224,7 @@ void testApp::draw(){
                 float y = yorig + radius * sin(angle);
                 
                 ofSetRectMode(OF_RECTMODE_CENTER);
-                ofEllipse(x,y,10,10);
+                ofRect(x,y,10,10);
                 
             }
             
@@ -232,6 +242,17 @@ void testApp::draw(){
         
         float xorig1 = ofGetWidth()/4;
         float yorig1 = ofGetHeight()/2;
+        
+        if (alterMS2) {
+            cout << "ALTERMS2" << endl;
+            c.setSaturation(160);
+            c.setHue(42);
+        } else {
+            c.setHue(170);
+            c.setSaturation(50);
+        }
+        
+        ofFill();
         
         
         for (int i = 0; i < 20; i++){
@@ -301,9 +322,9 @@ void testApp::draw(){
         
     }
     
-    if (alterMS1) {
-        c.setHsb(140, 54, 200);
-    }
+//    if (alterMS1) {
+//        c.setHsb(140, 54, 200);
+//    }
 
 }
 
@@ -314,7 +335,6 @@ void testApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
-    cout << ofGetElapsedTimeMillis() << endl;
 }
 
 //--------------------------------------------------------------

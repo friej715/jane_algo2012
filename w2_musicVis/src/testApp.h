@@ -38,6 +38,7 @@ class testApp : public ofBaseApp{
     
     bool alterMS0;
     bool alterMS1;
+    bool alterMS2;
     
     int startTime; // overall start
     
