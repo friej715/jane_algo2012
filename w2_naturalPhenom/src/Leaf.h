@@ -25,4 +25,6 @@ public:
     
     float scale;
     
+    ofImage l;
+    
 };

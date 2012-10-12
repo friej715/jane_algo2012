@@ -21,6 +21,8 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    ofBackground(0, 50, 100);
+                 
     for (int i = 0; i < leaves.size(); i++) {
         leaves[i].draw();
     }

@@ -20,9 +20,11 @@ void Leaf::setup() {
     
     offsetTime = int(ofRandom(10000));
     
-    c.set(200, 100, 150);
+    c.setHsb(int(ofRandom(0, 40)), int(ofRandom(50, 100)), 150);
     
     scale = ofRandom(.5, 1);
+    
+    l.loadImage("leaf.png");
 }
 
 void Leaf::update() {
@@ -48,8 +50,9 @@ void Leaf::update() {
 
 void Leaf::draw() {
     ofFill();
+    ofEnableAlphaBlending();
     ofSetColor(c);
     ofPushMatrix();
-    ofCircle(pos.x, pos.y, 30*scale);
+    l.draw(pos.x, pos.y, l.width*scale, l.height*scale);
     
 }
