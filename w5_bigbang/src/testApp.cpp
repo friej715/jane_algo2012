@@ -12,7 +12,7 @@ void testApp::setup(){
     
     for (int i = 0; i < 1000; i++){
 		particle myParticle;
-		myParticle.setInitialCondition(ofRandom(0,ofGetWidth()),ofRandom(0,ofGetHeight()),0,0);
+		myParticle.setInitialCondition(ofRandom(300,ofGetWidth()-300),ofRandom(300,ofGetHeight()-300),0,0);
 		particles.push_back(myParticle);
 	}
     
@@ -27,7 +27,7 @@ void testApp::update(){
     for (int i = 0; i < particles.size(); i++){
 		particles[i].resetForce();
         
-        particles[i].addAttractionForce(ofGetWidth()/2, ofGetHeight()/2, 500, sin(ofGetElapsedTimef()));
+        particles[i].addAttractionForce(ofGetWidth()/2, ofGetHeight()/2, 500, -sin(ofGetElapsedTimef()));
 		particles[i].addRepulsionForce(ofGetWidth()/2, ofGetHeight()/2, 500, cos(ofGetElapsedTimef()));
 		
 		// get the force from the vector field: 
