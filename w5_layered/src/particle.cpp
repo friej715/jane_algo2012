@@ -125,6 +125,6 @@ void particle::update(){
 
 //------------------------------------------------------------
 void particle::draw(){
-    ofRect(pos.x, pos.y, 5, 5);
+    ofCircle(pos.x, pos.y, 5);
 }
 
