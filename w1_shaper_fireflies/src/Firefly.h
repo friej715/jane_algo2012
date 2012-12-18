@@ -38,6 +38,9 @@ public:
     void changeDir();
     void interpolateByPct(float myPct);
     
+    vector<ofPoint> previousPoints;
+    
+    
 
     
 };

@@ -45,6 +45,12 @@ void Firefly::update() {
     pos.x += expanse*cos(angle);
     pos.y += expanse*sin(angle);
     
+    previousPoints.push_back(pos);
+    
+    if (previousPoints.size() > 20) {
+        previousPoints.erase(previousPoints.begin());
+    }
+    
 }
 
 void Firefly::draw() {
@@ -55,6 +61,11 @@ void Firefly::draw() {
     for (int i = 0; i < 5; i++) {
         ofEllipse(pos.x += 7*cos(angle+i*5), pos.y += 7*sin(angle+i*5), w*4, h*4);
     }
+    
+    
+//    for (int i = 0; i < previousPoints.size(); i++) {
+//        ofCircle(previousPoints[i].x, previousPoints[i].y, i);
+//    }
     
     ofSetColor(255, 200);
     ofFill();

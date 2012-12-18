@@ -258,11 +258,20 @@ void testApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
-	particles[0].pos.set(mouseX, mouseY);
+	//particles[0].pos.set(mouseX, mouseY);
 	/*particles.erase(particles.begin());
 	particle myParticle;
 	myParticle.setInitialCondition(x,y,0,0);
 	particles.push_back(myParticle);*/
+    
+	for (int i = 0; i < particles.size(); i++){
+		particles[i].draw();
+	}
+	
+	for (int i = 0; i < springs.size(); i++){
+		springs[i].draw();
+	}
+
 }
 
 //--------------------------------------------------------------
